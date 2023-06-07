@@ -13,14 +13,14 @@ public class Trie<E> {
 
     public Optional<GraphNode<E>> find(E[] target, GraphNode<E> current) {
         for (E subtarget : target) {
-            Optional<GraphNode<E>> subtarget_node = root.hasNeighbour(subtarget);
+            Optional<GraphNode<E>> subtarget_node = current.hasNeighbour(subtarget);
             if (subtarget_node.isPresent()) {
                 current = subtarget_node.get();
             } else {
                 return Optional.empty();
             }
         }
-        return Optional.of(current);
+        return current.getIsTerminal() ? Optional.of(current) : Optional.empty();
     }
 
     public void insert(E[] new_values) {
@@ -33,6 +33,7 @@ public class Trie<E> {
                 current = current.addNeighbour(new_value);
             }
         }
+        current.setIsTerminal(true);
     }
 
     public void setRoot(GraphNode<E> root) {

@@ -3,6 +3,7 @@ import java.util.Optional;
 
 public class GraphNode<E> {
     private E value;
+    private Boolean isTerminal = false;
     private ArrayList<GraphNode<E>> neighbours = new ArrayList<>();
 
     public GraphNode() {
@@ -16,8 +17,8 @@ public class GraphNode<E> {
         return this.value;
     }
 
-    public void setValue(E val) {
-        this.value = val;
+    public void setValue(E new_value) {
+        this.value = new_value;
     }
 
     public Boolean hasValue() {
@@ -49,5 +50,13 @@ public class GraphNode<E> {
 
     public void setNeighbours(ArrayList<GraphNode<E>> new_neighbours) {
         this.neighbours = new_neighbours;
+    }
+
+    public void setIsTerminal(Boolean new_isTerminal) {
+        this.isTerminal = new_isTerminal;
+    }
+
+    public Boolean getIsTerminal() {
+        return this.isTerminal;
     }
 }

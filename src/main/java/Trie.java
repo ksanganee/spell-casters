@@ -23,6 +23,18 @@ public class Trie<E> {
         return current.getIsTerminal() ? Optional.of(current) : Optional.empty();
     }
 
+    public Optional<GraphNode<E>> getNode(E[] target, GraphNode<E> current) {
+        for (E subtarget : target) {
+            Optional<GraphNode<E>> subtarget_node = current.hasNeighbour(subtarget);
+            if (subtarget_node.isPresent()) {
+                current = subtarget_node.get();
+            } else {
+                return Optional.empty();
+            }
+        }
+        return Optional.of(current);
+    }
+
     public void insert(E[] new_values) {
         GraphNode<E> current = root;
         for (E new_value : new_values) {
